@@ -113,4 +113,6 @@
     background-color: #299c1e !important;
     margin: 10px;
     border-radius: 5px;
+    justify-content: center;
+    align-items: center;
 }
