@@ -58,15 +58,15 @@ export default function Modal() {
         })
       );
 
-      console.log("transaction", transaction);
-
       transaction.feePayer = user.publicKey;
       let { blockhash } = await connection.getRecentBlockhash();
       transaction.recentBlockhash = blockhash;
 
-      const { signature } = await window.solana.signAndSendTransaction(
-        transaction
-      );
+      const { signature } = await window.solana
+        .signAndSendTransaction(transaction)
+        .catch((e) => console.log(e));
+
+      console.log(signature);
 
       setPending(true);
 
