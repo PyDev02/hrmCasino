@@ -17,7 +17,6 @@ const {
 
 exports.deposit = async (data, user) => {
   try {
-    console.log(user);
     if (!data.depositAmount || !data.signature) {
       console.log("Missing params");
       return "failed";
@@ -90,6 +89,12 @@ exports.deposit = async (data, user) => {
       return "failed";
     }
 
+    player.balance = parseFloat(
+      parseFloat(player.balance) + parseFloat(amountInTx)
+    ).toFixed(4);
+
+    await player.save();
+
     await transferDeposit(
       process.env.SOL_HOT_WALLET,
       player.walletSecret,
@@ -97,12 +102,6 @@ exports.deposit = async (data, user) => {
     );
 
     // console.log(sendToHotWallet);
-
-    player.balance = parseFloat(
-      parseFloat(player.balance) + parseFloat(amountInTx)
-    ).toFixed(4);
-
-    await player.save();
 
     return player.balance;
   } catch (e) {

@@ -47,32 +47,25 @@ export default function Modal() {
       const network = process.env.REACT_APP_NODE_URL;
       const connection = await new Connection(network);
 
-      await window.solana.connect().then((res) => console.log(res));
-      console.log(user.publicKey);
+      // await window.solana.connect().then((res) => console.log(res));
 
-      const transaction = new Transaction().add(
+      const transaction = await new Transaction().add(
         SystemProgram.transfer({
           fromPubkey: user.publicKey,
           toPubkey: walletAddress,
-          lamports: depositAmount * LAMPORTS_PER_SOL,
+          lamports: parseFloat(depositAmount).toFixed(4) * LAMPORTS_PER_SOL,
         })
       );
 
-      transaction.feePayer = user.publicKey;
+      transaction.feePayer = await user.publicKey;
 
       let { blockhash } = await connection.getRecentBlockhash();
 
-      console.log("blockhash", blockhash);
-
-      transaction.recentBlockhash = blockhash;
-
-      console.log("transaction", transaction);
+      transaction.recentBlockhash = await blockhash;
 
       const { signature } = await window.solana
         .signAndSendTransaction(transaction)
-        .catch((e) => console.log(e));
-
-      console.log("signature", signature);
+        .catch((e) => console.log("signature failed", e));
 
       setPending(true);
 
