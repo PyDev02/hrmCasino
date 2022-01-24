@@ -34,7 +34,8 @@ export default function Coinflip() {
       return console.log("connect wallet");
     } else {
       if (
-        betData.betAmount <= process.env.REACT_APP_MIN_BET ||
+        betData.betAmount <= 0 ||
+        betData.betAmount < process.env.REACT_APP_MIN_BET ||
         betData.betAmount > process.env.REACT_APP_MAX_BET ||
         betData.betAmount > walletBalance
       ) {

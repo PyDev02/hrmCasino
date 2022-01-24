@@ -103,6 +103,7 @@ export default function Roulette() {
     setIsWinner("");
 
     if (
+      betData.betAmount <= 0 ||
       betAmount < process.env.REACT_APP_MIN_BET ||
       betAmount > process.env.REACT_APP_MAX_BET ||
       betAmount > walletBalance
