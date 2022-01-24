@@ -45,11 +45,12 @@ export default function Modal() {
       }
 
       const network = process.env.REACT_APP_NODE_URL;
-      const connection = await new Connection(network);
+      const connection = new Connection(network);
 
       await window.solana.connect().then((res) => console.log(res));
+      console.log(user.publicKey);
 
-      const transaction = await new Transaction().add(
+      const transaction = new Transaction().add(
         SystemProgram.transfer({
           fromPubkey: user.publicKey,
           toPubkey: walletAddress,
@@ -59,7 +60,7 @@ export default function Modal() {
 
       console.log("transaction", transaction);
 
-      // transaction.feePayer = user.publicKey;
+      transaction.feePayer = user.publicKey;
       let { blockhash } = await connection.getRecentBlockhash();
       transaction.recentBlockhash = blockhash;
 
