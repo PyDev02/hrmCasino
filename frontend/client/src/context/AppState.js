@@ -10,7 +10,7 @@ import {
   Transaction,
 } from "@solana/web3.js";
 import io from "socket.io-client";
-const socketUrl = "ws://localhost:5000";
+const socketUrl = process.env.REACT_APP_SOCKET_URL;
 
 const AppState = (props) => {
   const [user, setUser] = useState({ address: "", publicKey: [] });
