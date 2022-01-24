@@ -59,7 +59,7 @@ export default function Modal() {
 
       console.log("transaction", transaction);
 
-      transaction.feePayer = user.publicKey;
+      // transaction.feePayer = user.publicKey;
       let { blockhash } = await connection.getRecentBlockhash();
       transaction.recentBlockhash = blockhash;
 
