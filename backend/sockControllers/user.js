@@ -35,7 +35,7 @@ exports.deposit = async (data, user) => {
     let tx = await connection.getTransaction(data.signature);
 
     if (!tx) {
-      console.log("trying again");
+      // console.log("trying again");
       delay(15000);
       tx = await connection.getConfirmedTransaction(data.signature);
     }

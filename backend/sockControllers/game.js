@@ -139,6 +139,10 @@ exports.crash = async (data, user, gameInProgress, players, io) => {
         return { success: false, balance: bettor.balance };
       }
 
+      if (data.multiplier < 1 || isNaN(data.multiplier)) {
+        return { success: false, balance: bettor.balance };
+      }
+
       if (bettor.balance < data.betAmount) {
         console.log("INSUFFICIENT_FUNDS");
         return { success: false, balance: bettor.balance };

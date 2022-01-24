@@ -49,7 +49,8 @@ export default function Crash() {
         betData.betAmount <= 0 ||
         betData.betAmount < process.env.REACT_APP_MIN_BET ||
         betData.betAmount > process.env.REACT_APP_MAX_BET ||
-        betData.betAmount > walletBalance
+        betData.betAmount > walletBalance ||
+        betData.multiplier < 1
       ) {
         return;
       }
