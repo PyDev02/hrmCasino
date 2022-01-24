@@ -25,6 +25,7 @@ const {
 
 exports.dice = async (data, user) => {
   try {
+    console.log(user);
     if (
       data.betAmount <= 0 ||
       data.betAmount > 0.1 ||

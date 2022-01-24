@@ -17,6 +17,7 @@ const {
 
 exports.deposit = async (data, user) => {
   try {
+    console.log(user);
     if (!data.depositAmount || !data.signature) {
       console.log("Missing params");
       return "failed";
@@ -52,6 +53,7 @@ exports.deposit = async (data, user) => {
 
     // Check that deposit address is equal to stored user wallet address
     if (keys[1].toString() !== user.walletAddress) {
+      console.log(keys[1].toString(), user.walletAddress);
       console.log("Mismatched addresses");
       return "failed";
     }
@@ -62,15 +64,13 @@ exports.deposit = async (data, user) => {
     let amountInTx =
       (userPreBalance - userPostBalance) / LAMPORTS_PER_SOL - 0.000005;
 
-    const newBalance = await connection.getBalance(
-      new PublicKey(user.walletAddress)
-    );
+    await connection.getBalance(new PublicKey(user.walletAddress));
 
-    console.log(amountInTx);
-
-    console.log(newBalance);
-
-    console.log(keys[0].toString(), keys[1].toString(), user.walletAddress);
+    // console.log(amountInTx);
+    //
+    // console.log(newBalance);
+    //
+    // console.log(keys[0].toString(), keys[1].toString(), user.walletAddress);
 
     // Check current time against signature time to ensure that signature is new
     let currentTime = Math.round(new Date().getTime() / 1000);
@@ -90,13 +90,13 @@ exports.deposit = async (data, user) => {
       return "failed";
     }
 
-    const sendToHotWallet = await transferDeposit(
+    await transferDeposit(
       process.env.SOL_HOT_WALLET,
       player.walletSecret,
       amountInTx
     );
 
-    console.log(sendToHotWallet);
+    // console.log(sendToHotWallet);
 
     player.balance = parseFloat(
       parseFloat(player.balance) + parseFloat(amountInTx)

@@ -47,38 +47,36 @@ export default function Modal() {
       const network = process.env.REACT_APP_NODE_URL;
       const connection = await new Connection(network);
 
-      await window.solana.connect().then(async (res) => {
-        const transaction = await new Transaction().add(
-          SystemProgram.transfer({
-            fromPubkey: res.publicKey,
-            toPubkey: walletAddress,
-            lamports: depositAmount * LAMPORTS_PER_SOL,
-          })
-        );
+      const transaction = await new Transaction().add(
+        SystemProgram.transfer({
+          fromPubkey: user.publicKey,
+          toPubkey: walletAddress,
+          lamports: depositAmount * LAMPORTS_PER_SOL,
+        })
+      );
 
-        transaction.feePayer = res.publicKey;
-        let { blockhash } = await connection.getRecentBlockhash();
-        transaction.recentBlockhash = blockhash;
+      transaction.feePayer = user.publicKey;
+      let { blockhash } = await connection.getRecentBlockhash();
+      transaction.recentBlockhash = blockhash;
 
-        const { signature } = await window.solana.signAndSendTransaction(
-          transaction
-        );
+      const { signature } = await window.solana.signAndSendTransaction(
+        transaction
+      );
 
-        setPending(true);
+      setPending(true);
 
-        await connection
-          .confirmTransaction(signature)
-          .then(() => {
-            socket.current.emit("/api/user/deposit", {
-              signature,
-              depositAmount,
-            });
-          })
-          .catch(() => {
-            console.log("tx failed");
-            return setTxFailed(true);
+      await connection
+        .confirmTransaction(signature)
+        .then(() => {
+          socket.current.emit("/api/user/deposit", {
+            signature,
+            depositAmount,
           });
-      });
+        })
+        .catch(() => {
+          console.log("tx failed");
+          return setTxFailed(true);
+        });
     } catch (e) {
       console.log(e);
     }
