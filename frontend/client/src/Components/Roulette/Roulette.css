@@ -1,0 +1,323 @@
+.chip-bet-roulette {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.right-top-roul {
+    display: flex;
+}
+
+.right-bottom-roul {
+    display: flex;
+    flex: 60% !important;
+    background-color: #202c2c;
+}
+
+.total-bet-roulette {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.total-amount-roulette {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.total-bet-display {
+    display: flex;
+    background-color: #121a1c;
+    width: 90%;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    border-radius: 5px 5px 0 0;
+    border-bottom: 1px solid #03100a;
+}
+
+.total-amount-display {
+    display: flex;
+    background-color: #121a1c;
+    width: 90%;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    border-radius: 0 0 5px 5px;
+    border-top: 1px solid #03100a;
+    margin-bottom: 10px;
+}
+
+.chip-select {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 50px;
+    justify-content: center;
+}
+
+.chip-select-options {
+    display: flex;
+    width: 90%;
+    background-color: #121a1c;
+    align-items: center;
+    justify-content: space-around;
+    padding: 10px;
+    border-radius: 0;
+    gap: 10px;
+}
+
+.chip-item {
+    display: flex;
+    background-color: #202c2c;
+    flex: 25%;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.wheel-div {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.board-div {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.upper-div {
+    display: flex;
+    width: 100%;
+    height: 60%;
+    justify-content: space-between;
+}
+
+.zero-div {
+    display: flex;
+    height: 100%;
+    flex: 10%;
+    background-color: #cab000;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    border: 1px solid #03100a;
+    color: white;
+    cursor: pointer;
+}
+
+.zero-div img {
+    display: flex;
+    width: 30%;
+}
+
+.main-numbers-div {
+    display: flex;
+    height: 100%;
+    flex: 80%;
+    background-color: #121a1c;
+}
+
+.main-left {
+    display: flex;
+    flex: 33%;
+    /*background-color: #9ca4a6;*/
+    height: 100%;
+    flex-wrap: wrap;
+}
+
+.main-middle {
+    display: flex;
+    flex: 33%;
+    height: 100%;
+    flex-wrap: wrap;
+}
+
+.main-right {
+    display: flex;
+    flex: 33%;
+    height: 100%;
+    flex-wrap: wrap;
+}
+
+.row-div {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    flex: 10%;
+    border: 1px solid #03100a;
+}
+
+.row-bet {
+    display: flex;
+    background-color: #202c2c;
+    border: 1px solid #03100a;
+    flex: 33%;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+}
+
+.row-bet img {
+    display: flex;
+    width: 30%;
+}
+
+.lower-div {
+    display: flex;
+    width: 80%;
+    height: 40%;
+    border: 1px solid #03100a;
+    justify-content: space-between;
+    color: white;
+}
+
+.blocks {
+    display: flex;
+    flex: 25%;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #03100a;
+    font-weight: bold;
+    cursor: pointer;
+    color: white;
+}
+
+.blocks img {
+    display: flex;
+    width: 35%;
+}
+
+.lower-div img {
+    display: flex;
+    width: 40px
+}
+
+
+.bl-div {
+    display: flex;
+    flex: 33%;
+    flex-direction: column;
+}
+
+.bl-inner {
+    display: flex;
+    flex: 50%;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #03100a;
+    height: 100%;
+    width: 100%;
+}
+
+.bm-div {
+    display: flex;
+    flex: 33%;
+    flex-direction: column;
+}
+
+.br-div {
+    display: flex;
+    flex: 33%;
+    flex-direction: column;
+}
+
+.bottom-spread-top {
+    display: flex;
+    height: 50%;
+    width: 100%;
+    /*border: 1px solid #03100a;*/
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.bottom-spread {
+    display: flex;
+    flex: 50%;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.bl-green {
+    background-color: green;
+}
+
+.bl-black {
+    background-color: #121a1c;
+}
+
+.wheel-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+}
+
+.wheel-div img {
+    display: flex;
+    max-width: 350px;
+    margin: -35px;
+}
+
+.roul-ball {
+    display: flex;
+    z-index: 1;
+    border-top: 16px solid green;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    position: fixed;
+}
+
+.roul-ball-div {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.outcome-wrapper {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.outcome-div {
+    display: flex;
+    width: 100px;
+    height: 50px;
+    border: 3px solid #299c1e;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    color: white;
+}
+
+.roll-result {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin: 20px;
+    font-size: 40px;
+    font-weight: bold;
+    color: #299c1e;
+}
+

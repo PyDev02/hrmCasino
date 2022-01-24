@@ -1,0 +1,12 @@
+{
+  "name": "solCasino",
+  "version": "1.0.0",
+  "dependencies": {
+  },
+  "scripts": {
+    "build": "cd frontend/client && npm run prod",
+    "install-client": "cd frontend/client && npm install",
+    "heroku-postbuild": "npm run install-client && npm run build",
+    "start": "cd backend && npm install && node index.js "
+  }
+}

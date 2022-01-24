@@ -1,0 +1,91 @@
+
+.rocket {
+    display: flex;
+    position: relative;
+    height: 100%;
+    width: 90%;
+    background-color: #03100a;
+    background-image: url("../../assets/images/space.jpeg") ;
+    background-repeat: no-repeat;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    transition: background-position ease-in-out 2s;
+}
+
+.rocket img {
+    display: flex;
+    width: 150px;
+    height: 100px;
+    position: absolute;
+    /*transition: left ease-in-out 1.5s !important;*/
+}
+
+
+.crash-multiplier {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    font-weight: bold;
+    color: greenyellow;
+    z-index: 10;
+}
+
+.multi-num {
+    display: flex;
+    font-size: 60px;
+    font-weight: bold;
+    color: white;
+}
+
+.recent-games {
+    display: flex;
+    flex-wrap: nowrap;
+    font-weight: bold;
+    padding: 20px;
+    width: 100%;
+    justify-content: center;
+}
+
+.recent-result {
+    display: flex;
+    background-color: #121a1c;
+    padding: 5px 10px 5px 10px;
+    border-radius: 10px;
+}
+
+.results-div {
+    display: flex;
+    gap: 10px;
+}
+
+.current-crash-players {
+    display: flex;
+    flex-direction: column;
+    min-height: 150px;
+    width: 100%;
+    padding: 10px;
+
+}
+
+.crash-players-inner {
+    display: flex;
+    flex-direction: column;
+    background-color: #121a1c;
+    height: 100%;
+    border-radius: 10px;
+    overflow: scroll;
+
+}
+
+
+.each-crash-bet {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-weight: bold;
+    margin: 10px;
+}

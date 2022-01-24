@@ -1,0 +1,223 @@
+.game-wrapper {
+    display: flex;
+    width: 100%;
+    /*min-height: 90vh;*/
+}
+
+.left-section {
+    display: flex;
+    flex: 10%;
+    height: 90vh;
+    background-color: #121a1c;
+    border-right: 1px solid #299c1e;
+    padding: 15px;
+}
+
+.left-section-inner {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    background-color: #202c2c;
+    border-radius: 8px;
+}
+
+.game-title {
+    display: flex;
+    border-bottom: 1px solid #299c1e;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #06e34e;
+}
+
+.bet-amount-div {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 10px;
+    font-weight: bold;
+    font-size: small;
+}
+
+.bet-amount-div input {
+    background-color: #121a1c;
+    border: none;
+    color: #299c1e;
+    height: 40px;
+    border-radius: 5px;
+    padding: 10px;
+    text-align: center;
+    width: 100%;
+}
+
+.bet-button-div {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.bet-btn {
+    display: flex;
+    background-image: linear-gradient(to right, #299c1e , greenyellow);
+    color: #03100a;
+    font-weight: bold;
+    width: 90%;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.bet-btn:hover {
+    /*background-image: linear-gradient(to left, #299c1e , greenyellow);*/
+    color: white;
+}
+
+.bet-options {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.max-min {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    font-weight: bold;
+    font-size: small;
+    margin: 10px;
+}
+
+.right-section {
+    display: flex;
+    flex-direction: column;
+    flex: 75%;
+    padding: 15px;
+}
+
+.right-top-section {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    flex: 75%;
+    background-color: #202c2c;
+    border-radius: 8px;
+    align-items: center;
+    padding: 30px;
+}
+
+.dice-result {
+    display: flex;
+    width: 125px;
+    background-color: transparent;
+    border-radius: 10%;
+    border: 3px solid #9ca4a6;
+    justify-content: center;
+    align-items: center;
+    flex: 20%;
+}
+
+.dice-digits {
+    display: flex;
+    font-weight: bold;
+    font-size: 50px;
+    color: white;
+    letter-spacing: 2px;
+}
+
+.dice-div {
+    display: flex;
+    flex-direction: row;
+    flex: 40%;
+    margin: 20px;
+    gap: 20px;
+}
+
+.dice {
+    display: flex;
+    background-image: linear-gradient(to bottom, #202c2c , #03100a);
+    width: 150px;
+    height: 150px;
+    border-radius: 10px;
+    border: 3px solid #03100a;
+    justify-content: center;
+    align-items: center;
+    font-size: 75px;
+    color: white;
+    font-weight: bold;
+}
+
+.number-range {
+    display: flex;
+    flex: 10%;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.right-bottom-section {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    flex: 25%;
+    background-color: #202c2c;
+    margin-top: 10px;
+    border-radius: 8px;
+    padding: 20px;
+    gap: 30px;
+    align-items: center;
+}
+
+.bottom-item {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    flex: 33%;
+    /*background-color: #03100a;*/
+    font-weight: bold;
+}
+
+.roll {
+    display: flex;
+    background-color: #03100a;
+    border-radius: 10px;
+    height: 75%;
+    width: 100%;
+    background-image: linear-gradient(to left, #121a1c , #03100a);
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+
+
+.win-chance {
+    display: flex;
+    background-color: #03100a;
+    border-radius: 10px;
+    width: 100%;
+    height: 75%;
+    background-image: linear-gradient(to left, #121a1c , #03100a);
+    align-items: center;
+    justify-content: center;
+}
+
+.multiplier {
+    display: flex;
+    background-color: #03100a;
+    border-radius: 10px;
+    width: 100%;
+    height: 75%;
+    background-image: linear-gradient(to left, #121a1c , #03100a);
+    align-items: center;
+    justify-content: center;
+}

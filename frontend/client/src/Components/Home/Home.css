@@ -1,0 +1,29 @@
+/*.homeBody {*/
+/*    width: 100vw;*/
+/*    position: absolute;*/
+/*    height: 1200px;*/
+/*    top: 0;*/
+/*    left: 0;*/
+/*    z-index: -1000;*/
+/*    background-image: url("../../assets/images/mafia.png");*/
+/*    background-repeat: no-repeat;*/
+/*    !*opacity: 0.2;*!*/
+/*}*/
+
+.hero {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background-color: #202c2c;
+    height: 60vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-image {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    /*align-items: center;*/
+}
