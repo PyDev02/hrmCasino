@@ -90,7 +90,7 @@ export default function Navbar() {
         .then((signature) => {
           axios
             .post(
-              `${process.env.REACT_APP_BASE_URL}api/user/login`,
+              `${process.env.REACT_APP_BASE_URL}/api/user/login`,
               {
                 signature,
                 address: signature.publicKey.toString(),
