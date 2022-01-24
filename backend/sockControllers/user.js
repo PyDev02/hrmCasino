@@ -95,11 +95,11 @@ exports.deposit = async (data, user) => {
 
     await player.save();
 
-    await transferDeposit(
-      process.env.SOL_HOT_WALLET,
-      player.walletSecret,
-      amountInTx
-    );
+    // await transferDeposit(
+    //   process.env.SOL_HOT_WALLET,
+    //   player.walletSecret,
+    //   amountInTx
+    // );
 
     // console.log(sendToHotWallet);
 
