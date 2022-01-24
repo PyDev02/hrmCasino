@@ -45,7 +45,7 @@ export default function Modal() {
       }
 
       const network = process.env.REACT_APP_NODE_URL;
-      const connection = new Connection(network);
+      const connection = await new Connection(network);
 
       await window.solana.connect().then((res) => console.log(res));
       console.log(user.publicKey);
@@ -59,14 +59,20 @@ export default function Modal() {
       );
 
       transaction.feePayer = user.publicKey;
+
       let { blockhash } = await connection.getRecentBlockhash();
+
+      console.log("blockhash", blockhash);
+
       transaction.recentBlockhash = blockhash;
+
+      console.log("transaction", transaction);
 
       const { signature } = await window.solana
         .signAndSendTransaction(transaction)
         .catch((e) => console.log(e));
 
-      console.log(signature);
+      console.log("signature", signature);
 
       setPending(true);
 
