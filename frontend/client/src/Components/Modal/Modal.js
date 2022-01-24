@@ -47,6 +47,8 @@ export default function Modal() {
       const network = process.env.REACT_APP_NODE_URL;
       const connection = await new Connection(network);
 
+      await window.solana.connect().then((res) => console.log(res));
+
       const transaction = await new Transaction().add(
         SystemProgram.transfer({
           fromPubkey: user.publicKey,
@@ -54,6 +56,8 @@ export default function Modal() {
           lamports: depositAmount * LAMPORTS_PER_SOL,
         })
       );
+
+      console.log("transaction", transaction);
 
       transaction.feePayer = user.publicKey;
       let { blockhash } = await connection.getRecentBlockhash();
