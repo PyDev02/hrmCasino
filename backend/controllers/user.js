@@ -130,7 +130,9 @@ exports.login = async (req, res) => {
           return res.status(400).send({ error: "InvalidCredentials" });
         }
 
-        res.cookie(`${process.env.TOKEN_PSUEDO_NAME}`, token);
+        res.cookie(`${process.env.TOKEN_PSUEDO_NAME}`, token, {
+          secure: process.env.NODE_ENV !== "development",
+        });
 
         return res.status(200).send({
           user: user.username,

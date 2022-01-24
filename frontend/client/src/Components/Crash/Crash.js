@@ -106,9 +106,11 @@ export default function Crash() {
   });
 
   useEffect(() => {
-    socket.current.on("balanceResult", (balance) => {
-      setWalletBalance(balance);
-    });
+    if (socket.current) {
+      socket.current.on("balanceResult", (balance) => {
+        setWalletBalance(balance);
+      });
+    }
   }, [recentGames]);
 
   return (
