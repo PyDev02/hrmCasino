@@ -45,11 +45,9 @@ export default function Modal() {
       }
 
       const network = process.env.REACT_APP_NODE_URL;
-      const connection = new Connection(network);
+      const connection = await new Connection(network);
 
       // await window.solana.connect().then((res) => console.log(res.publicKey));
-      console.log(user.publicKey);
-      console.log("here", walletAddress);
 
       const transaction = await new Transaction().add(
         SystemProgram.transfer({
