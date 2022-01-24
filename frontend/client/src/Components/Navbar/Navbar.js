@@ -104,6 +104,7 @@ export default function Navbar() {
               });
 
               setWalletAddress(res.data.walletAddress);
+              console.log(walletAddress);
               setWalletBalance(res.data.walletBalance);
 
               socket.current.connect();
