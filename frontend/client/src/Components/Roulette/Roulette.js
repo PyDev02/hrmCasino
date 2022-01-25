@@ -219,6 +219,40 @@ export default function Roulette() {
                 </button>
               </div>
 
+              <div className={"payout-legend"}>
+                <div className={"payout-legend-inner"}>
+                  <div className={"payout-legend-item"}>
+                    <span>Singles</span>
+                    <span>35 : 1</span>
+                  </div>
+
+                  <div className={"payout-legend-item"}>
+                    <span>Rows</span>
+                    <span>3 : 1</span>
+                  </div>
+
+                  <div className={"payout-legend-item"}>
+                    <span>Twelves</span>
+                    <span>3 : 1</span>
+                  </div>
+
+                  <div className={"payout-legend-item"}>
+                    <span>Eighteens</span>
+                    <span>2 : 1</span>
+                  </div>
+
+                  <div className={"payout-legend-item"}>
+                    <span>Green | Black</span>
+                    <span>2 : 1</span>
+                  </div>
+
+                  <div className={"payout-legend-item"}>
+                    <span>Odd | Even</span>
+                    <span>2 : 1</span>
+                  </div>
+                </div>
+              </div>
+
               <div className={"roll-result"}>
                 {isWinner === true
                   ? "You Win"

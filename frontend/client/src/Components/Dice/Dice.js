@@ -158,7 +158,7 @@ export default function Dice() {
                   onClick={() => submitBet()}
                   className={"btn bet-btn"}
                 >
-                  Roll Dice
+                  Roll
                 </button>
               </div>
 
