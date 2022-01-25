@@ -105,7 +105,7 @@ export default function Roulette() {
     if (
       betData.betAmount <= 0 ||
       betAmount < process.env.REACT_APP_MIN_BET ||
-      betAmount > process.env.REACT_APP_MAX_BET ||
+      betAmount > parseFloat(process.env.REACT_APP_MAX_BET).toFixed(3) ||
       betAmount > walletBalance
     ) {
       return setMessage(`Temporary Max/Min amount is 0.25/0.01`);
