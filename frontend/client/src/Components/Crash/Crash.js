@@ -168,7 +168,7 @@ export default function Crash() {
                   onClick={() => submitBet()}
                   className={"btn bet-btn"}
                 >
-                  Play
+                  Place Bet
                 </button>
               </div>
 
