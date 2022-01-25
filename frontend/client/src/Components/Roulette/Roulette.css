@@ -321,3 +321,12 @@
     color: #299c1e;
 }
 
+.reset-btn {
+    color: #121a1c;
+    font-weight: bold;
+    background-color: #cab000;
+}
+
+.reset-btn:hover {
+    color: white;
+}

@@ -19,12 +19,13 @@ export default function Crash() {
   const [recentGames, setRecentGames] = useState([]);
   const [nextGame, setNextGame] = useState(0);
   const [countdown, setCountdown] = useState(0);
+  const [disabled, setDisabled] = useState(false);
   const [players, setPlayers] = useState([]);
   const [multiplier, setMultipler] = useState(parseFloat(1).toFixed(2));
   const [isCrash, setIsCrash] = useState(false);
   const [betData, setBetData] = useState({
     betAmount: 0.05,
-    multiplier: 2,
+    multiplier: "",
   });
 
   const handleBetAmount = (e) => {
@@ -49,12 +50,24 @@ export default function Crash() {
         betData.betAmount <= 0 ||
         betData.betAmount < process.env.REACT_APP_MIN_BET ||
         betData.betAmount > process.env.REACT_APP_MAX_BET ||
-        betData.betAmount > walletBalance ||
-        betData.multiplier < 1
+        betData.betAmount > walletBalance
       ) {
         return;
       }
+
+      if (!isNaN(parseFloat(betData.multiplier)) && betData.multiplier < 1) {
+        return;
+      }
+
       socket.current.emit("/api/game/crash", betData);
+    }
+  };
+
+  const cashOut = () => {
+    if (!socket.current.connected) {
+      return console.log("connect wallet");
+    } else {
+      socket.current.emit("/api/game/cashout", multiplier);
     }
   };
 
@@ -85,14 +98,17 @@ export default function Crash() {
         setRecentGames(data.recentGames);
         setIsCrash(true);
 
-        socket.current.emit("/api/user/balance", "balance");
-
         setTimeout(() => {
           setMultipler(parseFloat(1).toFixed(2));
+          socket.current.emit("/api/user/balance", "balance");
+
+          socket.current.on("balanceResult", (balance) => {
+            setWalletBalance(balance);
+          });
         }, 2000);
 
         setTimeout(() => {
-          setCountdown(5);
+          setCountdown(7);
         }, 2000);
       });
     }
@@ -107,12 +123,10 @@ export default function Crash() {
   });
 
   useEffect(() => {
-    if (socket.current) {
-      socket.current.on("balanceResult", (balance) => {
-        setWalletBalance(balance);
-      });
-    }
-  }, [recentGames]);
+    if (countdown <= 0) {
+      setDisabled(true);
+    } else setDisabled(false);
+  }, [countdown]);
 
   return (
     <>
@@ -135,24 +149,36 @@ export default function Crash() {
                   type="text"
                 />
 
-                <span>Auto Cashout</span>
-                <input
-                  autoComplete={"off"}
-                  name={"multiplier"}
-                  value={betData.multiplier}
-                  onChange={(e) => handleBetAmount(e)}
-                  className={""}
-                  type="text"
-                />
+                <div style={{ marginTop: "10px" }}>
+                  <span>Auto Cashout</span>
+                  <input
+                    autoComplete={"off"}
+                    name={"multiplier"}
+                    value={betData.multiplier}
+                    onChange={(e) => handleBetAmount(e)}
+                    className={""}
+                    type="text"
+                  />
+                </div>
+              </div>
+
+              <div className={"bet-button-div"}>
+                <button
+                  disabled={disabled}
+                  onClick={() => submitBet()}
+                  className={"btn bet-btn"}
+                >
+                  Place Bet
+                </button>
               </div>
 
               <div className={"bet-button-div"}>
                 <button
                   disabled={false}
-                  onClick={() => submitBet()}
+                  onClick={() => cashOut()}
                   className={"btn bet-btn"}
                 >
-                  Place Bet
+                  CashOut
                 </button>
               </div>
 
@@ -162,7 +188,9 @@ export default function Crash() {
               </div>
 
               <div className={"current-crash-players"}>
-                <span>Players</span>
+                <div style={{ margin: "5px", fontWeight: "bold" }}>
+                  <span>Players</span>
+                </div>
                 <div className={"card crash-players-inner"}>
                   {players.map((bet) => (
                     <>
@@ -176,7 +204,9 @@ export default function Crash() {
                         className={"each-crash-bet"}
                       >
                         <span>{bet.player.substring(0, 8)}</span>
-                        <span>{bet.multiplier}x</span>
+                        <span>
+                          {isNaN(bet.multiplier) ? "" : `${bet.multiplier}x`}
+                        </span>
                       </div>
                     </>
                   ))}
@@ -218,8 +248,18 @@ export default function Crash() {
               </div>
               <img
                 style={{
-                  left: multiplier * 4 < 100 ? `${multiplier * 4}%` : "100%",
-                  bottom: multiplier * 4 < 100 ? `${multiplier * 4}%` : "100%",
+                  left:
+                    multiplier * 4 < 100
+                      ? `${multiplier * 4}%`
+                      : multiplier * 4 > 100
+                      ? "100%"
+                      : "1%",
+                  bottom:
+                    multiplier * 4 < 100
+                      ? `${multiplier * 4}%`
+                      : multiplier * 4 > 100
+                      ? "100%"
+                      : "1%",
                   height: isCrash ? "150px" : "",
                 }}
                 src={isCrash ? explosion : rocket}

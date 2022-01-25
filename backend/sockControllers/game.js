@@ -27,8 +27,8 @@ exports.dice = async (data, user) => {
   try {
     if (
       data.betAmount <= 0 ||
-      data.betAmount > 0.1 ||
-      data.betAmount < 0.001 ||
+      data.betAmount < 0.01 ||
+      data.betAmount > 0.25 ||
       isNaN(data.betAmount)
     ) {
       console.log("Bet Amount Error");
@@ -131,16 +131,18 @@ exports.crash = async (data, user, gameInProgress, players, io) => {
     if (!gameInProgress) {
       if (
         data.betAmount <= 0 ||
-        data.betAmount < 0.001 ||
-        data.betAmount > 0.1 ||
+        data.betAmount < 0.01 ||
+        data.betAmount > 0.25 ||
         isNaN(data.betAmount)
       ) {
         console.log("here Bet Amount Error", data.betAmount);
         return { success: false, balance: bettor.balance };
       }
 
-      if (data.multiplier < 1 || isNaN(data.multiplier)) {
-        return { success: false, balance: bettor.balance };
+      if (!isNaN(parseFloat(data.multiplier))) {
+        if (data.multiplier && data.multiplier < 1) {
+          return { success: false, balance: bettor.balance };
+        }
       }
 
       if (bettor.balance < data.betAmount) {
@@ -182,13 +184,40 @@ exports.crash = async (data, user, gameInProgress, players, io) => {
   }
 };
 
+// Cashout for crash game
+exports.cashout = async (
+  data,
+  user,
+  gameInProgress,
+  players,
+  io,
+  multiplier
+) => {
+  try {
+    if (!gameInProgress) {
+      return;
+    }
+
+    players.map((player) => {
+      if (player.player === user.username) {
+        if (multiplier < player.multiplier) {
+          player.multiplier = multiplier;
+        }
+      }
+    });
+    io.sockets.emit("players", players);
+  } catch (e) {
+    console.log(e);
+  }
+};
+
 exports.roulette = async (data, user) => {
   try {
     // console.log(data);
     if (
       data.betAmount <= 0 ||
-      data.betAmount < 0.001 ||
-      data.betAmount > 1 ||
+      data.betAmount < 0.01 ||
+      data.betAmount > 0.25 ||
       isNaN(data.betAmount) ||
       !data.selectedSlots
     ) {
@@ -323,8 +352,8 @@ exports.coinflip = async (data, user) => {
   try {
     if (
       data.betAmount <= 0 ||
-      data.betAmount > 0.1 ||
-      data.betAmount < 0.001 ||
+      data.betAmount < 0.01 ||
+      data.betAmount > 0.25 ||
       isNaN(data.betAmount)
     ) {
       console.log("Bet Amount Error");

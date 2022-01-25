@@ -17,7 +17,13 @@ const helmet = require("helmet");
 const User = require("./models/User");
 const { authenticate } = require("./middleware/authenticate");
 const { deposit, withdraw, balance } = require("./sockControllers/user");
-const { dice, crash, roulette, coinflip } = require("./sockControllers/game");
+const {
+  dice,
+  crash,
+  roulette,
+  coinflip,
+  cashout,
+} = require("./sockControllers/game");
 const { results1, results2, results3 } = require("./sockControllers/helpers");
 
 // Middleware
@@ -96,6 +102,20 @@ io.on("connect", (socket) => {
       });
     });
 
+    // CashOut for crash game
+    socket.on("/api/game/cashout", async (data) => {
+      authenticate(socket).then((user) => {
+        cashout(
+          data,
+          user,
+          gameInProgress,
+          players,
+          io,
+          currentMultiplier
+        ).then((res) => socket.emit("cashOutResult", res));
+      });
+    });
+
     // Roulette
     socket.on("/api/game/roulette", async (data) => {
       authenticate(socket).then((user) => {
@@ -145,6 +165,7 @@ io.on("connect", (socket) => {
 
 let recentGames = [];
 let winners = [];
+let currentMultiplier = 0;
 
 const runCrash = async () => {
   // Set random crash number
@@ -187,6 +208,7 @@ const runCrash = async () => {
 
     setTimeout(() => {
       io.sockets.emit("crash", parseFloat(numbers[i]).toFixed(2));
+      currentMultiplier = parseFloat(numbers[i]).toFixed(2);
 
       if (i === numbers.length - 1) {
         // Keep game list under 20
@@ -198,7 +220,7 @@ const runCrash = async () => {
 
         // Check for winners
         players.forEach(async (player) => {
-          if (player.multiplier <= crashed) {
+          if (!isNaN(player.multiplier) && player.multiplier <= crashed) {
             areWinners = true;
 
             const winner = await User.findOne({
@@ -237,9 +259,9 @@ const runCrash = async () => {
         // Restart game
         setTimeout(() => {
           runCrash();
-        }, 8000);
+        }, 10000);
       }
-    }, i * 10);
+    }, i * 50);
   });
 };
 

@@ -26,7 +26,7 @@ export default function Roulette() {
   const [wheelRoll, setWheelRoll] = useState(1440);
   const [betAmount, setBetAmount] = useState(0);
   const [landedSlot, setLandedSlot] = useState(0);
-  const [selectedChip, setSelectedChip] = useState(0.001);
+  const [selectedChip, setSelectedChip] = useState(0.01);
   const [selectedSlots, setSelectedSlots] = useState([]);
   const [message, setMessage] = useState("");
   const [isWinner, setIsWinner] = useState("");
@@ -108,7 +108,7 @@ export default function Roulette() {
       betAmount > process.env.REACT_APP_MAX_BET ||
       betAmount > walletBalance
     ) {
-      return setMessage(`Temporary Max/Min amount is 0.001/0.01`);
+      return setMessage(`Temporary Max/Min amount is 0.25/0.01`);
     }
 
     if (!socket.current.connected) {
@@ -173,14 +173,14 @@ export default function Roulette() {
                     </div>
 
                     <div
-                      onClick={() => setSelectedChip(0.5)}
+                      onClick={() => setSelectedChip(0.125)}
                       className={"chip-item"}
                     >
                       <span>50</span>
                     </div>
 
                     <div
-                      onClick={() => setSelectedChip(1)}
+                      onClick={() => setSelectedChip(0.25)}
                       className={"chip-item"}
                     >
                       <span>100</span>
@@ -211,9 +211,12 @@ export default function Roulette() {
               </div>
 
               <div>
-                <span className={"btn"} onClick={() => handleReset()}>
+                <button
+                  className={"reset-btn btn btn-sm"}
+                  onClick={() => handleReset()}
+                >
                   Reset
-                </span>
+                </button>
               </div>
 
               <div className={"roll-result"}>
